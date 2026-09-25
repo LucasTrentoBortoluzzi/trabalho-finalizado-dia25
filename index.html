@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>CineSort MAX</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- ==============================
+       FUNDO ANIMADO
+  =============================== -->
+  <div class="background-carousel">
+    <div class="track">
+
+      <img src="2003.webp" alt="Filme">
+      <img src="174277d39d58aa38220a7f983eddefcd.jpg" alt="Filme">
+      <img src="top-20-films-of-all-time-v0-h5t9xjozh58f1.webp" alt="Filme">
+      <img src="x92v80xcddoa1.jpg" alt="Filme">
+      <img src="images.jpeg" alt="Filme">
+      <img src="z9xed4f4guw71.jpg" alt="Filme">
+
+      <!-- Duplicação para animação infinita -->
+      <img src="2003.webp" alt="Filme">
+      <img src="174277d39d58aa38220a7f983eddefcd.jpg" alt="Filme">
+      <img src="top-20-films-of-all-time-v0-h5t9xjozh58f1.webp" alt="Filme">
+      <img src="x92v80xcddoa1.jpg" alt="Filme">
+      <img src="images.jpeg" alt="Filme">
+      <img src="z9xed4f4guw71.jpg" alt="Filme">
+
+    </div>
+  </div>
+
+
+  <!-- ==============================
+       APLICAÇÃO
+  =============================== -->
+  <main class="app-viewport">
+
+    <!-- CABEÇALHO -->
+    <header class="app-header">
+
+      <div class="brand">
+        🎬 CINESORT MAX
+      </div>
+
+      <h1>
+        Sua Experiência Interativa de Cinema
+      </h1>
+
+      <p>
+        Explore gêneros, rode a sorte ou filtre por notas de crítica.
+      </p>
+
+    </header>
+
+
+    <!-- ==============================
+         CONTROLES
+    =============================== -->
+    <section class="controls-section">
+
+      <div class="filter-group">
+
+        <label for="genre">
+          🎭 Gênero do Filme
+        </label>
+
+        <select id="genre">
+
+          <option value="todos">
+            Todos os Gêneros
+          </option>
+
+          <option value="acao">
+            Ação
+          </option>
+
+          <option value="comedia">
+            Comédia
+          </option>
+
+          <option value="romance">
+            Romance
+          </option>
+
+          <option value="animacao">
+            Animação
+          </option>
+
+          <option value="fantasia">
+            Fantasia
+          </option>
+
+          <option value="drama">
+            Drama
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <!-- BOTÕES -->
+      <div class="button-bar">
+
+        <button
+          class="btn btn-main"
+          onclick="sortearFilme()"
+        >
+          🎲 Sortear Filme
+        </button>
+
+
+        <button
+          class="btn btn-flash"
+          onclick="sortearAcaoRapida()"
+        >
+          ⚡ Sorteio Rápido
+        </button>
+
+
+        <button
+          class="btn btn-top"
+          onclick="sortearMelhores()"
+        >
+          🔥 Apenas Top 8.5+
+        </button>
+
+
+        <button
+          id="btn-favorito"
+          class="btn btn-fav"
+          onclick="salvarFavorito()"
+        >
+          ⭐ Favoritar Atual
+        </button>
+
+
+        <button
+          class="btn btn-reset"
+          onclick="resetarTudo()"
+        >
+          🔄 Limpar
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- ==============================
+         ROLETA
+    =============================== -->
+    <div
+      id="roulette"
+      class="roulette-box"
+      style="display: none;"
+    >
+
+      <span class="roulette-badge">
+        🎬 SELECIONANDO FILME...
+      </span>
+
+      <h2
+        id="roulette-title"
+        class="roulette-title"
+      >
+        Buscando...
+      </h2>
+
+    </div>
+
+
+    <!-- ==============================
+         RESULTADO
+    =============================== -->
+    <article
+      id="result-card"
+      class="result-display"
+      style="display: none;"
+    >
+
+      <div class="display-header">
+
+        <span
+          id="genre-tag"
+          class="badge genre"
+        >
+          GÊNERO
+        </span>
+
+        <span
+          id="rating-tag"
+          class="badge rating"
+        >
+          ★ 0.0
+        </span>
+
+        <span
+          id="year-tag"
+          class="badge year"
+        >
+          ANO
+        </span>
+
+      </div>
+
+
+      <h2 id="movie-title">
+        Nome do Filme
+      </h2>
+
+
+      <p class="director-info">
+        🎬 Direção de
+        <span id="movie-director">
+          Diretor
+        </span>
+      </p>
+
+
+      <p
+        id="movie-description"
+        class="synopsis"
+      >
+        Aqui aparecerá a sinopse do filme.
+      </p>
+
+
+      <div class="display-footer">
+
+        <div class="platform-info">
+
+          <span>
+            📺 Onde assistir:
+          </span>
+
+          <strong id="movie-where">
+            Plataforma
+          </strong>
+
+        </div>
+
+
+        <div
+          id="fav-status"
+          class="fav-status"
+        ></div>
+
+      </div>
+
+    </article>
+
+
+    <!-- ==============================
+         FAVORITOS
+    =============================== -->
+    <section class="favoritos-section">
+
+      <div class="favoritos-header">
+
+        <div>
+          <h2>
+            ⭐ Meus Favoritos
+          </h2>
+
+          <p>
+            Seus filmes favoritos ficam salvos neste navegador.
+          </p>
+        </div>
+
+
+        <button
+          class="btn btn-delete"
+          onclick="limparFavoritos()"
+        >
+          🗑️ Limpar Favoritos
+        </button>
+
+      </div>
+
+
+      <div
+        id="lista-favoritos"
+        class="lista-favoritos"
+      >
+
+        <p class="sem-favoritos">
+          Você ainda não possui filmes favoritos.
+        </p>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- JAVASCRIPT -->
+  <script src="main.js"></script>
+
+</body>
+</html>
